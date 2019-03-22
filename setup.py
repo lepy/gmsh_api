@@ -1,7 +1,17 @@
 # coding: utf-8
 
 import os
+import sys
 import setuptools
+
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+if sys.version_info[0] < 3:
+    with open(path.join(this_directory, 'README.md')) as f:
+        long_description = f.read()
+else:
+    with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+        long_description = f.read()
 
 def extract_version():
     init_py = os.path.join(os.path.dirname(__file__), "gmsh_api", "__init__.py")
@@ -29,15 +39,15 @@ setup_params = dict(
 
     packages=setuptools.find_packages(exclude=["tests"]),  # , include=[ "./gmsh_api/libgmsh.so"]
     zip_safe=False,
-
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     install_requires=['numpy', 'pandas'],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
     ],
     package_data={'': ['gmsh_api/libgmsh.so']},
-    include_package_data=True,
-
+    include_package_data=True
 )
 
 if __name__ == "__main__":
