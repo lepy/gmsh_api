@@ -58,7 +58,7 @@ class Mesh():
         coord = np.array(coord)
         coord = coord.reshape(len(coord) // 3, 3)
         nodes = pd.DataFrame({'nid': nids, 'x': coord[:, 0], 'y': coord[:, 1], 'z': coord[:, 2]})
-        nodes.index = nodes.nid
+        nodes.index = nodes.nid.values.copy()
 
         self = cls()
         self.elements = elements
