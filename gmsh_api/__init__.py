@@ -1,4 +1,4 @@
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 __credits__ = 'Christophe Geuzaine' # you are my hero ;-)
 
 import logging
@@ -59,6 +59,8 @@ class Mesh():
         coord = coord.reshape(len(coord) // 3, 3)
         nodes = pd.DataFrame({'nid': nids, 'x': coord[:, 0], 'y': coord[:, 1], 'z': coord[:, 2]})
         nodes.index = nodes.nid.values.copy()
+
+        elements.reset_index(inplace=True, drop=True)
 
         self = cls()
         self.elements = elements
