@@ -13,7 +13,7 @@
 
 from ctypes import *
 from ctypes.util import find_library
-import signal
+#import signal
 import os
 import platform
 from math import pi
@@ -24,7 +24,7 @@ GMSH_API_VERSION_MINOR = 5
 
 __version__ = GMSH_API_VERSION
 
-signal.signal(signal.SIGINT, signal.SIG_DFL)
+#signal.signal(signal.SIGINT, signal.SIG_DFL)
 libdir = os.path.dirname(os.path.realpath(__file__))
 if platform.system() == "Windows":
     libpath = os.path.join(libdir, "gmsh-4.5.dll")
