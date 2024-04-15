@@ -1,11 +1,11 @@
-__version__ = '0.1.6.484'
+__version__ = '4.13.0'
 __credits__ = 'Christophe Geuzaine' # you are my hero ;-)
 
 import logging
 import os
 import numpy as np
 import pandas as pd
-
+import gmsh
 
 class Mesh():
     """a mesh container"""
