@@ -5,7 +5,7 @@ import logging
 import os
 import numpy as np
 import pandas as pd
-import gmsh
+import gmsh_api.gmsh
 
 class Mesh():
     """a mesh container"""
@@ -20,7 +20,7 @@ class Mesh():
     def from_gmsh(cls, gmsh):
         """create mesh from gmsh"""
 
-        elements = pd.DataFrame(columns=['pid', 'elid', 'type', 'n_nodes', 'nodes'])
+        elements = [] # pd.DataFrame(columns=['pid', 'elid', 'type', 'n_nodes', 'nodes'])
         etypes, elids, enids = gmsh.model.mesh.getElements()
         typedict = dict(zip(etypes, range(len(etypes))))
         logging.debug(typedict)
@@ -37,7 +37,7 @@ class Mesh():
             quads["nidxs"] = quad_nodes
             quads["type"] = "shell4"
             quads["pid"] = 1
-            elements = elements.append(quads, sort=False)
+            elements.append(quads)
         # tria
         idx = typedict.get(2)
         if idx is not None:
@@ -52,7 +52,7 @@ class Mesh():
             trias["nidxs"] = tria_nodes
             trias["type"] = "shell3"
             trias["pid"] = 1
-            elements = elements.append(trias, sort=False)
+            elements.append(trias)
 
         nids, coord, parametric_coord = gmsh.model.mesh.getNodes()
         coord = np.array(coord)
@@ -60,6 +60,7 @@ class Mesh():
         nodes = pd.DataFrame({'nid': nids, 'x': coord[:, 0], 'y': coord[:, 1], 'z': coord[:, 2]})
         nodes.index = nodes.nid.values.copy()
 
+        elements = pd.concat(elements, ignore_index=True)
         elements.reset_index(inplace=True, drop=True)
 
         self = cls()
