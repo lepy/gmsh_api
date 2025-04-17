@@ -40,7 +40,6 @@ def test_square():
     print(mesh.elements)
 
 
-
     assert len(mesh.elements) == 10
     assert len(mesh.nodes) == 17
 

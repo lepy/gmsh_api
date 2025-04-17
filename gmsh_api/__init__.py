@@ -1,4 +1,4 @@
-__version__ = '4.13.0'
+__version__ = '4.13.1'
 __credits__ = 'Christophe Geuzaine' # you are my hero ;-)
 
 import logging

@@ -3,6 +3,8 @@
 simple package to use gmsh via the original gmsh_api 
 (https://gitlab.onelab.info/gmsh/gmsh/blob/master/api/gmsh.py, https://gmsh.info/bin/Linux/gmsh-X.Y.Z-Linux64-sdk.tgz).
 
+https://gmsh.info/bin/Linux/
+
 Christophe Geuzaine is a hero.
 
 ## Usage
